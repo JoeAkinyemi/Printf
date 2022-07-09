@@ -1,77 +1,40 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdlib.h>
-#include <stdarg.h>
+#include <stdarg.h> /* va_list,va_start,va_end,va_arg*/
+#include <stdlib.h> /* malloc, free */
+#include <unistd.h> /* write */
+/* for testing purpose,removed when done */
+#include <stdio.h>
 
-/**
- * struct flags - struct containing flags to "turn on"
- * when a flag specifier is passed to _printf()
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
- */
-typedef struct flags
-{
-    int plus;
-    int space;
-    int hash;
-} flags_t;
-
-/**
- * struct printHandler - struct to choose the right function depending
- * on the format specifier passed to _printf()
- * @c: format specifier
- * @f: pointer to the correct printing function
- */
-typedef struct printHandler
-{
-    char c;
-    int (*f)(va_list ap, flags_t *f);
-} ph;
-
-/* print_nums */
-int print_int(va_list l, flags_t *f);
-void print_number(int n);
-int print_unsigned(va_list l, flags_t *f);
-int count_digit(int i);
-
-/* print_bases */
-int print_hex(va_list l, flags_t *f);
-int print_hex_big(va_list l, flags_t *f);
-int print_binary(va_list l, flags_t *f);
-int print_octal(va_list l, flags_t *f);
-
-/* converter */
-char *convert(unsigned long int num, int base, int lowercase);
-
-/* _printf */
-int _printf(const char *format, ...);
-
-/* get_print */
-int (*get_print(char s))(va_list, flags_t *);
-
-/* get_flag */
-int get_flag(char s, flags_t *f);
-
-/* print_alpha */
-int print_string(va_list l, flags_t *f);
-int print_char(va_list l, flags_t *f);
-
-/* write_funcs */
+/* utility functions */
+char *_strcpy(char *dest, char *src);
+int _strlen(char *s);
+/*void _putchar(char *c, int len);*/
 int _putchar(char c);
-int _puts(char *str);
+void _puts(char *str);
+char *create_a_buffer(void);
+int scan_buffer_overflow(char *buffer, int len);
+void print_buffer(char *buffer, int len, va_list list);
+char* (*get_func(char i))(va_list);
+int process_format(char *format, va_list valist);
+void process_func(char *f, int* counter, int* len);
 
-/* print_custom */
-int print_rot13(va_list l, flags_t *f);
-int print_rev(va_list l, flags_t *f);
-int print_bigS(va_list l, flags_t *f);
+/* printf functions */
+int _printf(char *format, ...);
+char *print_c(va_list list);
+char *print_s(va_list list);
 
-/* print_address */
-int print_address(va_list l, flags_t *f);
+/**
+ * struct types - defining struct fields
+ * @ch: identifier of type to print (e.g. c means char)
+ * @func: ptr to functions that print according to identifier (e.g. print_c)
+ */
 
-/* print_percent */
-int print_percent(va_list l, flags_t *f);
-
+typedef struct types
+{
+	char ch;
+	char* (*func)(va_list);
+} print;
 
 #endif
