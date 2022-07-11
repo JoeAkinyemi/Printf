@@ -13,9 +13,15 @@
  */
 typedef struct flags
 {
+<<<<<<< HEAD
 	int plus;
 	int space;
 	int hash;
+=======
+    int plus;
+    int space;
+    int hash;
+>>>>>>> 6ad6ff8ec786e15761ec3d46a561f7c494d5c931
 } flags_t;
 
 /**
@@ -26,8 +32,13 @@ typedef struct flags
  */
 typedef struct printHandler
 {
+<<<<<<< HEAD
 	char c;
 	int (*f)(va_list ap, flags_t *f);
+=======
+    char c;
+    int (*f)(va_list ap, flags_t *f);
+>>>>>>> 6ad6ff8ec786e15761ec3d46a561f7c494d5c931
 } ph;
 
 /* print_nums */
