@@ -1,16 +1,36 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stdlib.h>
-#include <stdarg.h>
+#include <stdarg.h> /* va_list,va_start,va_end,va_arg*/
+#include <stdlib.h> /* malloc, free */
+#include <unistd.h> /* write */
+/* for testing purpose,removed when done */
+#include <stdio.h>
+
+/* utility functions */
+char *_strcpy(char *dest, char *src);
+int _strlen(char *s);
+/*void _putchar(char *c, int len);*/
+int _putchar(char c);
+void _puts(char *str);
+char *create_a_buffer(void);
+int scan_buffer_overflow(char *buffer, int len);
+void print_buffer(char *buffer, int len, va_list list);
+char* (*get_func(char i))(va_list);
+int process_format(char *format, va_list valist);
+void process_func(char *f, int* counter, int* len);
+
+/* printf functions */
+int _printf(char *format, ...);
+char *print_c(va_list list);
+char *print_s(va_list list);
 
 /**
- * struct flags - struct containing flags to "turn on"
- * when a flag specifier is passed to _printf()
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
+ * struct types - defining struct fields
+ * @ch: identifier of type to print (e.g. c means char)
+ * @func: ptr to functions that print according to identifier (e.g. print_c)
  */
+<<<<<<< HEAD
 typedef struct flags
 {
 <<<<<<< HEAD
@@ -23,15 +43,12 @@ typedef struct flags
     int hash;
 >>>>>>> 6ad6ff8ec786e15761ec3d46a561f7c494d5c931
 } flags_t;
+=======
+>>>>>>> 05b99741a134c0354c5a8f55b8bd256520e45b9f
 
-/**
- * struct printHandler - struct to choose the right function depending
- * on the format specifier passed to _printf()
- * @c: format specifier
- * @f: pointer to the correct printing function
- */
-typedef struct printHandler
+typedef struct types
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	char c;
 	int (*f)(va_list ap, flags_t *f);
@@ -84,5 +101,10 @@ int print_address(va_list l, flags_t *f);
 /* print_percent */
 int print_percent(va_list l, flags_t *f);
 
+=======
+	char ch;
+	char* (*func)(va_list);
+} print;
+>>>>>>> 05b99741a134c0354c5a8f55b8bd256520e45b9f
 
 #endif
